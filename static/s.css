@@ -1,0 +1,69 @@
+@import 'https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap';
+@import 'https://fonts.googleapis.com/css?family=Cutive+Mono';
+
+body {
+    background: #0C1618;
+    color: #7F9C96;
+    font-family: roboto mono, monospace
+}
+
+.main {
+    text-align: center;
+    position: absolute;
+}
+
+input {
+    font-family: 'Cutive Mono', monospace
+}
+
+.center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.controls {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.controls a {
+    color: #4FB6A2;
+    text-decoration: none;
+}
+
+.login {
+    font-family: 'Cutive Mono', monospace;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.login a {
+    color: #4FB6A2;
+    text-decoration: none;
+}
+
+.login a:hover {
+    color: #4FB6A2;
+}
+
+.login input {
+    display: block;
+    padding: 10px;
+    margin: 15px;
+    width: 350px;
+    outline: 0;
+    color: white;
+    background: transparent;
+    border: 1px solid #4FB6A2;
+    box-sizing: border-box;
+}
+
+* {
+    scrollbar-width: thin;
+}

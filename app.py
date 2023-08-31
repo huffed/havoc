@@ -1,27 +1,21 @@
-from flask import Flask, render_template, request, redirect, url_for
-from sqlalchemy import create_engine, text
-from utils.sql_connect import mysql
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_limiter import Limiter
+from sqlalchemy import text
+# from utils.sql_connect import mysql_connection
 from argon2 import PasswordHasher, Type
-import secrets
-import string
 
 app = Flask(__name__)
-
-db_url = f"mysql+mysqlconnector://{mysql['username']}:{mysql['password']}@{mysql['hostname']}:{mysql['port']}/{mysql['schema']}"
-engine = create_engine(db_url)
-
-# connection = engine.connect()
+limiter = Limiter(
+    lambda: request.remote_addr,
+    app=app,
+    storage_uri="memory://",
+)
 
 hasher = PasswordHasher(
     hash_len=30,
     salt_len=10,
     type=Type.ID
 )
-
-
-def check_availability(username):
-    select_query = text("select * from users where username = :username")
-    # result = connection.execute(select_query, {"username": username}).fetchone()
 
 
 @app.route('/')
@@ -35,6 +29,7 @@ def login():
         user = request.form.get("u")
         password = request.form.get("p")
         # add encryption to password form and integrate with a database
+
     else:
         return render_template('login.html')
 
@@ -49,6 +44,9 @@ def register():
         if len(username) <= 2:
             return render_template('register.html', error_message="Username must be at least 3 characters long.")
 
+        invite_key = request.form.get('k')
+        select_query = text("")
+
         insert_statement = text(
             "INSERT INTO admin.users (username, password, invite) VALUES (:username, :password, :invite)")
         data = {
@@ -61,6 +59,28 @@ def register():
         return redirect('/dashboard')
     else:
         return render_template('register.html', error_message=None)
+
+
+@app.route('/check_availability', methods=['GET'])
+@limiter.limit(limit_value="500 per hour")
+def check_availability():
+    select_query = text("select username from users where username = :username")
+
+    # add different process for when its coming from register or login
+    # check = connection.execute(select_query, parameters={username: request.form.get('username')}
+
+    # add check for if result returns anything, if it does, return taken, otherwise say remove the error message
+
+    response = {
+        "availability": True,
+        "origin": "register"
+    }
+    return jsonify(response)
+
+
+def show_input(value):
+    print(value)
+    return value
 
 
 @app.route('/dashboard')

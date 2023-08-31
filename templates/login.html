@@ -6,16 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login - havoc</title>
     <link rel="stylesheet" href="static/s.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
 <div class="login">
     <a href="/">home page</a>
     <form method="post">
-        <input type="text" placeholder="username" name="u">
-        <input type="password" placeholder="password" name="p">
-        <input style="cursor: pointer" type="submit" value="submit">
+        <div class="input-container">
+            <input type="text" placeholder="username" name="u">
+            <input type="password" placeholder="password" name="p">
+        </div>
+        <div class="login-controls">
+            <div id="error-message" class="error-message">{{ error_message }}</div>
+            <input style="cursor: pointer" type="submit" value="submit" class="submit-button">
+        </div>
     </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </div>
 </body>
 

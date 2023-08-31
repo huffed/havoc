@@ -1,24 +1,41 @@
 $(document).ready(function() {
-    var usernameInput = $("input[name='u']");
-    var errorMessage = $("#error-message");
+    var timeout;
 
-    usernameInput.on("input", function() {
-        var username = usernameInput.val();
+    function validateinput() {
+        var input = $("input[name='u']");
+        var username = input.val();
+        var error = $("#error-message");
 
-        if (username.length <= 2) {
-            errorMessage.text("Username must be at least 3 characters long");
-            errorMessage.show();
-            usernameInput.css("border-color", "red")
+        if (username.length === 0) {
+            error.hide();
+            input.removeClass("input-error");
+        } else if (username.length <= 2) {
+            error.text("Username must be at least 3 characters long");
+            error.show();
+            input.addClass("input-error");
         } else {
-            errorMessage.hide();
-            usernameInput.css("border-color", "")
-        }
-    });
+            error.hide();
+            input.removeClass("input-error");
 
-    usernameInput.on("blur", function() {
-        if (usernameInput.val().length === 0) {
-            errorMessage.hide();
-            usernameInput.css("border-color", "");
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                checkUsernameAvailability(username);
+            }, 500);
         }
+    }
+
+    function checkUsernameAvailability(username) {
+        $.ajax({
+            type: "GET",
+            url: "/check_availability",
+            data: { username: username },
+            success: function(response) {
+                // Handle the response if needed
+            }
+        });
+    }
+
+    ['input', 'blur'].forEach(function(event){
+        window.addEventListener(event,validateinput);
     });
 });

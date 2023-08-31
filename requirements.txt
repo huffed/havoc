@@ -1,2 +1,6 @@
-flask
-requests==2.26.0
+flask==2.3.3
+requests==2.31.0
+sqlalchemy==2.0.20
+mysql-connector-python==8.1.0
+argon2-cffi==23.1.0
+argon2-cffi-bindings==21.2.0

@@ -1,0 +1,11 @@
+{
+  "databases": {
+    "mysql": {
+      "username": "root",
+      "password": "123456789",
+      "hostname": "localhost",
+      "port": "3306",
+      "schema": "admin"
+    }
+  }
+}

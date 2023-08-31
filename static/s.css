@@ -55,13 +55,29 @@ input {
 .login input {
     display: block;
     padding: 10px;
-    margin: 15px;
     width: 350px;
     outline: 0;
     color: white;
     background: transparent;
     border: 1px solid #4FB6A2;
     box-sizing: border-box;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.submit-button {
+    margin-top: 10px
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
 }
 
 * {

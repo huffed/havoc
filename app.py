@@ -21,7 +21,7 @@ hasher = PasswordHasher(
 
 def check_availability(username):
     select_query = text("select * from users where username = :username")
-    result = connection.execute(select_query, {"username": username}).fetchone()
+    # result = connection.execute(select_query, {"username": username}).fetchone()
 
 
 @app.route('/')
@@ -32,8 +32,8 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        user = request.form["u"]
-        password = request.form["p"]
+        user = request.form.get("u")
+        password = request.form.get("p")
         # add encryption to password form and integrate with a database
     else:
         return render_template('login.html')
@@ -44,18 +44,23 @@ def register():
     if request.method == "POST":
         # add checks for if all fields are filled, then check if username is available, then check if password is good
         # goodnight xoxo
+
+        username = request.form.get('u')
+        if len(username) <= 2:
+            return render_template('register.html', error_message="Username must be at least 3 characters long.")
+
         insert_statement = text(
             "INSERT INTO admin.users (username, password, invite) VALUES (:username, :password, :invite)")
         data = {
-            "username": request.form["u"],
-            "password": hasher.hash(request.form["p"]),
-            "invite": request.form["k"]
+            "username": request.form.get("u"),
+            "password": hasher.hash(request.form.get("p")),
+            "invite": request.form.get("k")
         }
-        connection.execute(insert_statement, parameters=data)
-        connection.commit()
+        # connection.execute(insert_statement, parameters=data)
+        # connection.commit()
         return redirect('/dashboard')
     else:
-        return render_template('register.html')
+        return render_template('register.html', error_message=None)
 
 
 @app.route('/dashboard')

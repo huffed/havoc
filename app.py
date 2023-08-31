@@ -40,11 +40,11 @@ def register():
         # add checks for if all fields are filled, then check if username is available, then check if password is good
         # goodnight xoxo
 
-        username = request.form.get('u')
+        username = request.form.get('username')
         if len(username) <= 2:
             return render_template('register.html', error_message="Username must be at least 3 characters long.")
 
-        invite_key = request.form.get('k')
+        invite_key = request.form.get('invite key')
         select_query = text("")
 
         insert_statement = text(

@@ -2,7 +2,7 @@ $(document).ready(function() {
     var timeout;
 
     function validateinput() {
-        var input = $("input[name='u']");
+        var input = $("input[name='username']");
         var username = input.val();
         var error = $("#error-message");
 

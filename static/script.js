@@ -10,9 +10,12 @@ $(document).ready(function() {
             error.hide();
             input.removeClass("input-error");
         } else if (username.length <= 2) {
-            error.text("Username must be at least 3 characters long");
-            error.show();
-            input.addClass("input-error");
+            clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                error.text("Username must be at least 3 characters long");
+                error.show();
+                input.addClass("input-error");
+            }, 300);
         } else {
             error.hide();
             input.removeClass("input-error");

@@ -18,8 +18,10 @@
             <input type="password" placeholder="password" name="p">
             <input type="text" placeholder="invite code" name="k">
         </div>
-        <div id="error-message" class="error-message">{{ error_message }}</div>
-        <input type="submit" value="submit" class="submit-button">
+        <div class="login-controls">
+            <div id="error-message" class="error-message">{{ error_message }}</div>
+            <input type="submit" value="submit" class="submit-button">
+        </div>
     </form>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </div>

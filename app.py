@@ -10,7 +10,7 @@ app = Flask(__name__)
 db_url = f"mysql+mysqlconnector://{mysql['username']}:{mysql['password']}@{mysql['hostname']}:{mysql['port']}/{mysql['schema']}"
 engine = create_engine(db_url)
 
-connection = engine.connect()
+# connection = engine.connect()
 
 hasher = PasswordHasher(
     hash_len=30,

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-widthinitial-scale=1.0">
     <title>register - havoc</title>
-    <link rel="stylesheet" href="static/s.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/s.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -23,7 +23,7 @@
             <input style="cursor: pointer" type="submit" value="submit" class="submit-button">
         </div>
     </form>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </div>
 </body>
 

@@ -54,7 +54,7 @@ def register():
         select_query = text("")
 
         insert_statement = text(
-            "INSERT INTO admin.users (username, password, invite) VALUES (:username, :password, :invite)")
+            "INSERT INTO users (username, password, invite) VALUES (:username, :password, :invite)")
         data = {
             "username": request.form.get("u"),
             "password": hasher.hash(request.form.get("p")),

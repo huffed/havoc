@@ -6,7 +6,7 @@ from argon2 import PasswordHasher, Type
 
 app = Flask(__name__)
 limiter = Limiter(
-    lambda: request.remote_addr,
+    lambda: str(request.remote_addr),
     app=app,
     storage_uri="memory://",
 )
@@ -26,7 +26,7 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        user = request.form.get("u")
+        username = request.form.get("u")
         password = request.form.get("p")
         # add encryption to password form and integrate with a database
 
@@ -64,7 +64,8 @@ def register():
 @app.route('/check_availability', methods=['GET'])
 @limiter.limit(limit_value="500 per hour")
 def check_availability():
-    select_query = text("select username from users where username = :username")
+    select_query = text(
+        "select username from users where username = :username")
 
     # add different process for when its coming from register or login
     # check = connection.execute(select_query, parameters={username: request.form.get('username')}

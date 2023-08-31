@@ -1,9 +1,9 @@
 {
   "databases": {
     "mysql": {
-      "username": "root",
-      "password": "123456789",
-      "hostname": "localhost",
+      "username": "jack",
+      "password": "Cr1m1n4ls",
+      "hostname": "192.168.1.208",
       "port": "3306",
       "schema": "admin"
     }

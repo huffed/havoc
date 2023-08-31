@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_limiter import Limiter
+from flask_caching import Cache
 from sqlalchemy import text
 # from utils.sql_connect import mysql_connection
 from argon2 import PasswordHasher, Type
@@ -11,6 +12,10 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
+cache = Cache(app, config={
+    "CACHE_TYPE": "simple"
+})
+
 hasher = PasswordHasher(
     hash_len=30,
     salt_len=10,
@@ -19,6 +24,7 @@ hasher = PasswordHasher(
 
 
 @app.route('/')
+@cache.cached(timeout=120)
 def index():
     return render_template('index.html')
 

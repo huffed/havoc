@@ -1,0 +1,4 @@
+flask==2.2.2
+requests==2.31.0
+sqlalchemy==1.4.39
+argon2-cffi==21.3.0

@@ -67,7 +67,14 @@ input {
     position: absolute;
 }
 
-.input-container {
+.register-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.login-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -82,7 +89,6 @@ input {
     color: red;
     font-size: 14px;
     margin-top: 5px;
-    display: none;
 }
 
 * {

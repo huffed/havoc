@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    var timeout;
+$(document).ready(function () {
+  var timeout;
 
   function validateinput() {
     var input = $(".register-container input[name='username']");
@@ -23,25 +23,26 @@ $(document).ready(function() {
         error.hide();
         input.removeClass("input-error");
 
-            clearTimeout(timeout);
-            timeout = setTimeout(function() {
-                checkUsernameAvailability(username);
-            }, 500);
-        }
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          checkUsernameAvailability(username);
+        }, 500);
+      }
     }
+  }
 
-    function checkUsernameAvailability(username) {
-        $.ajax({
-            type: "GET",
-            url: "/check_availability",
-            data: { username: username },
-            success: function(response) {
-                // Handle the response if needed
-            }
-        });
-    }
-
-    ['input', 'blur'].forEach(function(event){
-        window.addEventListener(event,validateinput);
+  function checkUsernameAvailability(username) {
+    $.ajax({
+      type: "GET",
+      url: "/check_availability",
+      data: { username: username },
+      success: function (response) {
+        // Handle the response if needed
+      },
     });
+  }
+
+  ["input", "blur"].forEach(function (event) {
+    window.addEventListener(event, validateinput);
+  });
 });

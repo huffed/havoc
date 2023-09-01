@@ -2,19 +2,30 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "start server",
+            "name": "Server",
             "type": "python",
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "app.py",
-                "FLASK_DEBUG": "1"
+            "FLASK_APP": "app.py",
+            "FLASK_DEBUG": "1",
+            "PYDEVD_DISABLE_FILE_VALIDATION": "1"
             },
-            "args": [
-                "run",
-                "--no-debugger",
-                "--no-reload"
-            ],
+            "args": ["run"],
+            "jinja": true,
+            "justMyCode": true
+        },
+        {
+            "name": "Server (No debug/reload)",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+            "FLASK_APP": "app.py",
+            "FLASK_DEBUG": "1",
+            "PYDEVD_DISABLE_FILE_VALIDATION": "1"
+            },
+            "args": ["run", "--no-debugger", "--no-reload"],
             "jinja": true,
             "justMyCode": true
         }

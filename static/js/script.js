@@ -5,22 +5,26 @@ $(document).ready(function () {
     var input = $(".register-container input[name='username']");
     var username = input.val();
     var error = $("#error-message");
+    var submit = $("input[type='submit' i]");
 
-    error.hide();
+    error.text("");
+    submit.css("margin-top", "20px");
 
     if (username != null) {
       if (username.length === 0) {
-        error.hide();
+        error.text("");
+        submit.css("margin-top", "20px");
         input.removeClass("input-error");
       } else if (username.length <= 2) {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
           error.text("Username must be at least 3 characters long");
-          error.show();
+          submit.css("padding-bottom", "4px");
           input.addClass("input-error");
         }, 300);
       } else {
-        error.hide();
+        error.text("");
+        submit.css("margin-top", "20px");
         input.removeClass("input-error");
 
         clearTimeout(timeout);

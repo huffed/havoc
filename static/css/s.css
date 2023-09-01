@@ -67,6 +67,10 @@ input {
     position: absolute;
 }
 
+.submit-button {
+    padding-bottom: 4px;
+}
+
 .register-container {
     display: flex;
     flex-direction: column;
@@ -81,14 +85,11 @@ input {
     margin-top: 5px;
 }
 
-.submit-button {
-    margin-top: 10px
-}
-
 .error-message {
     color: red;
     font-size: 14px;
-    margin-top: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 * {

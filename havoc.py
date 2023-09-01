@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_limiter import Limiter
 from flask_caching import Cache
 from sqlalchemy import text
-# from utils.sql_connect import mysql_connection
+from utils.sql_connect import mysql_connection
 from argon2 import PasswordHasher, Type
 
 app = Flask(__name__)
@@ -32,10 +32,11 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        username = request.form.get("u")
-        password = request.form.get("p")
         # add encryption to password form and integrate with a database
-
+        select_query = text("select username, password from users where username = :username")
+        valid_check = mysql_connection.execute(select_query, parameters={"username": request.form.get("u")})
+        print(valid_check)
+        return redirect('#')
     else:
         return render_template('login.html')
 

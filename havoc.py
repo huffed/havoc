@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, Response
 from flask_limiter import Limiter
 from flask_caching import Cache
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from utils.sql_connect import mysql_uri
 from argon2 import PasswordHasher, Type
+import json
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "havoc"
@@ -92,17 +93,18 @@ def check_availability():
     select_query = text("""
                         select username from users where username = :username
                         """)
-
-    # add different process for when its coming from register or login
-    # check = connection.execute(select_query, parameters={username: request.form.get('username')}
-
-    # add check for if result returns anything, if it does, return taken, otherwise say remove the error message
-
-    response = {
-        "availability": True,
-        "origin": "register"
-    }
-    return jsonify(response)
+    result = mysql_db.session.execute(
+        select_query, {"username": request.args.get("username")}).fetchone()
+    if result == None:
+        return Response(json.dumps({
+            "message": "Username is available.",
+            "available": True
+        }))
+    else:
+        return Response(json.dumps({
+            "message": "Username is unavailable.",
+            "available": False
+        }))
 
 
 def show_input(value):

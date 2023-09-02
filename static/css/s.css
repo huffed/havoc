@@ -41,6 +41,7 @@ input {
     top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 350px;
 }
 
 .login a {
@@ -63,7 +64,7 @@ input {
     box-sizing: border-box;
 }
 
-.input-container {
+.input-container * {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -72,6 +73,7 @@ input {
 
 .submit-button {
     cursor: pointer;
+    margin-top: 40px
 }
 
 .error-message {

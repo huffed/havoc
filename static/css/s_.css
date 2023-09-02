@@ -46,6 +46,7 @@ input {
 .login a {
     color: #4FB6A2;
     text-decoration: none;
+    padding-bottom: 5px;
 }
 
 .login a:hover {
@@ -63,21 +64,28 @@ input {
     box-sizing: border-box;
 }
 
-.input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 10px;
+.login-controls {
+    position: absolute;
 }
 
 .submit-button {
-    cursor: pointer;
+    padding-bottom: 4px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.input-container input {
+    margin: 0 7.5px;
 }
 
 .error-message {
     color: red;
     font-size: 14px;
-    margin: 12px;
+    box-sizing: border-box;
 }
 
 * {

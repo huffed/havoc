@@ -1,0 +1,8 @@
+flask==2.3.3
+flask_sqlalchemy==3.0.5
+flask_login==0.6.2
+flask_argon2==0.3.0.0
+flask_wtf==1.1.1
+wtforms==3.0.1
+email_validator==2.0.0.post2
+pymysql==1.1.0

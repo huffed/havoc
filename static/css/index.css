@@ -1,8 +1,9 @@
+@import 'styles.css';
 @import 'https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap';
 
 body {
-    background: #0C1618;
-    color: #7F9C96;
+    background: var(--background-color);
+    color: var(--primary-color);
     font-family: roboto mono, monospace
 }
 
@@ -22,7 +23,7 @@ body {
 }
 
 .buttons a {
-    color: #4FB6A2;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 

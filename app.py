@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import mysql
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms.validators import InputRequired, Length, ValidationError, EqualTo
 from sqlalchemy import text
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
 from flask_argon2 import Argon2
@@ -41,10 +41,12 @@ class User(db.Model, UserMixin):
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "username"})
+        min=3, max=20, message=None)], render_kw={"placeholder": "username"})
 
-    password = PasswordField(validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "password"})
+    password = PasswordField(validators=[InputRequired(), EqualTo("confirm", message="Passwords don't match"), Length(
+        min=4)], render_kw={"placeholder": "password"})
+
+    confirm = PasswordField(render_kw={"placeholder": "confirm password"})
 
     submit = SubmitField("submit")
 
@@ -58,10 +60,10 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "username"})
+        min=3, max=20)], render_kw={"placeholder": "username"})
 
     password = PasswordField(validators=[InputRequired(), Length(
-        min=4, max=20)], render_kw={"placeholder": "password"})
+        min=4)], render_kw={"placeholder": "password"})
 
     submit = SubmitField("submit")
 

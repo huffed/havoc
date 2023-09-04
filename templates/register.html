@@ -4,23 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register - havoc</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/auth.css')}}">
 </head>
 <body>
+    <div class="center-text">
+        <p style="font-size: 40px">REGISTER</p>
+    </div>
 
-    <a href="/">home page</a>
+    <div class="main">
+        <a href="/">home page</a>
 
-    <div class="error">{{error}}</div>
+        <div class="error">
+            {% if form.errors %}
+                    {% for field, errors in form.errors.items() %}
+                        {% for error in errors %}
+                            {{ error }}
+                        {% endfor %}
+                    {% endfor %}
+            {% endif %}
+        </div>
 
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            {{ form.username }}
+            {{ form.password }}
+            {{ form.confirm }}
+            {{ form.submit }}
+        </form>
 
-    <div class="account-check">
-        Already have an account?
-        <a href="{{url_for('register')}}"> Log in</a>
+        <div class="account-check">
+            Already have an account?
+            <a href="{{url_for('login')}}"> Log in</a>
+        </div>
     </div>
 </body>
 </html>

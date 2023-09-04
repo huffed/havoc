@@ -1,0 +1,73 @@
+@import 'styles.css';
+@import 'https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap';
+@import 'https://fonts.googleapis.com/css?family=Cutive+Mono';
+
+body {
+    background: var(--background-color);
+    background-size: cover;
+    color: var(--primary-color);
+    font-family:  'Cutive Mono', monospace;
+}
+
+.center-text {
+    font-family: roboto, monospace;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: calc();
+    transform: translate(-50%, -50%);
+}
+
+.main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    /* width: 350px; */
+}
+
+.main input {
+    font-family:  'Cutive Mono', monospace;
+    display: block;
+    padding: 10px;
+    margin: 20px;
+    width: 350px;
+    outline: 0;
+    color: white;
+    background: transparent;
+    border: 1px solid var(--secondary-color);
+    box-sizing: border-box;
+}
+
+.main input[type="submit"] {
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.main .error {
+    position: absolute;
+    width: 350px;
+    color: red;
+    font-size: 14px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    bottom: 22px;
+}
+
+* {
+    scrollbar-width: thin;
+}

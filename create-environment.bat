@@ -1,5 +1,5 @@
-conda create -y -n Havoc python=3.11.4
+conda create -y -n havoc python=3.11.4
 
-conda activate Havoc
+conda activate havoc
 
 pip install --no-input -r requirements.txt

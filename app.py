@@ -1,17 +1,19 @@
+from forms.user_forms import RegisterForm, LoginForm
+from models.user import User
 from flask import Flask, render_template, url_for, redirect
-from flask_sqlalchemy import SQLAlchemy
 from config import mysql
 from sqlalchemy import text
 from flask_login import login_user, LoginManager, login_required, logout_user
 from flask_argon2 import Argon2
-from models import *
-from forms import *
+from database import db
+from extensions import argon2
 
 app = Flask(__name__)
-argon2 = Argon2(app)
+argon2.init_app(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{mysql['username']}:{mysql['password']}@{mysql['host']}:{mysql['port']}/{mysql['schema']}"
 app.config["SECRET_KEY"] = "havoc3141"
-db = SQLAlchemy(app)
+
+db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -63,6 +65,11 @@ def register():
         return redirect(url_for('login'))
 
     return render_template("register.html", form=form)
+
+
+@app.route("/@<username>")
+def user_profile(username):
+    return render_template("user_profile.html", user=username)
 
 
 @app.route("/dashboard", methods=["GET", "POST"])

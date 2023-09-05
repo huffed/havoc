@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError, EqualTo
-from models import *
-from app import argon2
+from models.user import User
+from extensions import argon2
 
 
 class RegisterForm(FlaskForm):

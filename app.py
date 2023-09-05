@@ -59,11 +59,18 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(
-        min=3, max=20)], render_kw={"placeholder": "username"})
+    username = StringField(validators=[InputRequired()], render_kw={
+                           "placeholder": "username"})
 
-    password = PasswordField(validators=[InputRequired(), Length(
-        min=4)], render_kw={"placeholder": "password"})
+    password = PasswordField(validators=[InputRequired()], render_kw={
+                             "placeholder": "password"})
+
+    def validate_username(self, username):
+        existing_user_username = User.query.filter_by(
+            username=username.data).first()
+
+        if existing_user_username is None or not argon2.check_password_hash(existing_user_username.password, str(self.password.data)):
+            raise ValidationError("Username or password incorrect.")
 
     submit = SubmitField("submit")
 
@@ -84,6 +91,8 @@ def login():
             if argon2.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for("dashboard"))
+            else:
+                return render_template("login.html", form=form)
 
     return render_template("login.html", form=form)
 

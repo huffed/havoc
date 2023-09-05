@@ -14,7 +14,7 @@ body {
     text-align: center;
     position: absolute;
     left: 50%;
-    top: calc();
+    top: 20%;
     transform: translate(-50%, -50%);
 }
 

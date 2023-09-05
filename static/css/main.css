@@ -1,0 +1,102 @@
+@import 'styles.css';
+
+html, body {
+    margin: 0;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+.header-container {
+    align-items: center;
+    background: var(--background-color-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 90px;
+    padding: 0 35px;
+    width: 100%;
+}
+
+.header-container #right {
+    align-items: center;
+    display: flex;
+}
+
+.header-container .user-container {
+    align-items: center;
+    display: flex;
+    margin-left: 40px;
+}
+
+.header-container .user-container .user {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.header-container .user-container .user .user-button {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    user-select: none;
+}
+
+.header-container .user-container .user .user-button .avatar {
+    align-items: center;
+    background: var(--background-color-light);
+    border-radius: 50%;
+    display: flex;
+    height: 35px;
+    justify-content: center;
+    position: relative;
+    width: 35px;
+}
+
+.header-container .user-container .user .user-button .avatar > img {
+    border-radius: 50%;
+    height: 33px;
+    width: 33px;
+}
+
+.header-container #right #triangle {
+    border-color: #fff transparent transparent;
+    border-style: solid;
+    border-width: 5px 4px 0;
+    display: block;
+    height: 0;
+    margin: 0 0 0 7px;
+    transition: border-color .4s ease;
+    width: 0;
+}
+
+img {
+    border-style: none;
+    vertical-align: middle;
+}
+
+button {
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    font-weight: inherit;
+    margin: 0;
+    font-size: 100%;
+}
+
+button, input {
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+}

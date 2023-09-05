@@ -1,12 +1,11 @@
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from config import mysql
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError, EqualTo
 from sqlalchemy import text
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
+from flask_login import login_user, LoginManager, login_required, logout_user
 from flask_argon2 import Argon2
+from models import *
+from forms import *
 
 app = Flask(__name__)
 argon2 = Argon2(app)
@@ -22,57 +21,6 @@ login_manager.login_view = "login"
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-
-class User(db.Model, UserMixin):
-    __tablename__ = "users"
-    uid = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
-    password = db.Column(db.String(500), nullable=False)
-    avatar = db.Column(db.String(200), nullable=False, default="")
-    usergroup = db.Column(db.SmallInteger, nullable=False, default=0)
-
-    def get_id(self):
-        return self.uid
-
-    def __repr__(self):
-        return f"<User {self.username}>"
-
-
-class RegisterForm(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(
-        min=3, max=20, message=None)], render_kw={"placeholder": "username"})
-
-    password = PasswordField(validators=[InputRequired(), EqualTo("confirm", message="Passwords don't match"), Length(
-        min=4)], render_kw={"placeholder": "password"})
-
-    confirm = PasswordField(render_kw={"placeholder": "confirm password"})
-
-    submit = SubmitField("submit")
-
-    def validate_username(self, username):
-        existing_user_username = User.query.filter_by(
-            username=username.data).first()
-
-        if existing_user_username:
-            raise ValidationError("Username already exists.")
-
-
-class LoginForm(FlaskForm):
-    username = StringField(validators=[InputRequired()], render_kw={
-                           "placeholder": "username"})
-
-    password = PasswordField(validators=[InputRequired()], render_kw={
-                             "placeholder": "password"})
-
-    def validate_username(self, username):
-        existing_user_username = User.query.filter_by(
-            username=username.data).first()
-
-        if existing_user_username is None or not argon2.check_password_hash(existing_user_username.password, str(self.password.data)):
-            raise ValidationError("Username or password incorrect.")
-
-    submit = SubmitField("submit")
 
 
 @app.route("/")

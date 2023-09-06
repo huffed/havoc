@@ -10,6 +10,8 @@ from extensions import argon2
 from flask_s3 import FlaskS3
 import boto3
 from werkzeug.utils import secure_filename
+from PIL import Image
+from io import BytesIO
 
 app = Flask(__name__)
 argon2.init_app(app)
@@ -89,7 +91,7 @@ def register():
 @app.route("/@<username>")
 @login_required
 def user_profile(username):
-    return render_template("user_profile.html", user=username)
+    return render_template("user-profile.html", user=current_user, username=current_user.username, uid=current_user.uid, avatar=s3_client.generate_presigned_url('get_object', Params={'Bucket': app.config["FLASKS3_BUCKET_NAME"], 'Key': current_user.avatar}, ExpiresIn=100))
 
 
 @app.route("/@<username>/edit-profile", methods=["GET", "POST"])
@@ -101,7 +103,29 @@ def edit_profile(username):
         image = form.image.data
 
         if image:
+            cropped_image = Image.open(image)
+
+            width, height = cropped_image.size
+            crop_width, crop_height = 184, 184
+
+            size = min(width, height)
+            left = (width - size) / 2
+            upper = (width - size) / 2
+            right = (width + size) / 2
+            lower = (width + size) / 2
+
+            cropped_image = cropped_image.crop(
+                (left, upper, right, lower))
+
+            cropped_image = cropped_image.resize((crop_width, crop_height))
+
             filename = secure_filename(image.filename)
+
+            image_data = BytesIO()
+
+            cropped_image.save(image_data, format="JPEG")
+
+            image_data.seek(0)
 
             s3_client.delete_object(
                 Bucket=app.config["FLASKS3_BUCKET_NAME"],
@@ -109,7 +133,7 @@ def edit_profile(username):
             )
 
             s3_client.upload_fileobj(
-                image,
+                image_data,
                 app.config["FLASKS3_BUCKET_NAME"],
                 filename
             )
@@ -117,13 +141,16 @@ def edit_profile(username):
             current_user.avatar = filename
             db.session.commit()
 
+            cropped_image.close()
+            image_data.close()
+
     return render_template("edit-profile.html", form=form)
 
 
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
 def dashboard():
-    return render_template("dashboard.html", user=current_user, avatar=s3_client.generate_presigned_url('get_object', Params={'Bucket': app.config["FLASKS3_BUCKET_NAME"], 'Key': current_user.avatar}, ExpiresIn=100))
+    return render_template("dashboard.html", user=current_user, username=current_user.username, uid=current_user.uid, avatar=s3_client.generate_presigned_url('get_object', Params={'Bucket': app.config["FLASKS3_BUCKET_NAME"], 'Key': current_user.avatar}, ExpiresIn=100))
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 :root {
     --background-color: #0C1618;
+    --background-color-mid: hsl(190, 33%, 10%);
     --background-color-light: hsl(190, 33%, 15%);
     --primary-color: #7F9C96;
     --secondary-color: #4FB6A2;

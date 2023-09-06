@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard - havoc</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <script src="https://kit.fontawesome.com/5daaff4575.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- <a href="{{url_for('logout')}}">logout</a><br>
@@ -17,6 +18,10 @@
                 <div class="user-container">
                     <div class="user">
                         <button type="button" class="user-button">
+                            <div class="identifier">
+                                <div class="username" style="font-size: 14px;">{{username}}</div>
+                                <div class="name">{{uid}}</div>
+                            </div>
                             <div class="avatar">
                                 <img src="{{avatar}}" alt="{{user.username}}">
                             </div>
@@ -26,7 +31,6 @@
                 </div>
             </div>
         </div>
-        <div>{{current_user.username}}</div>
     </div>
 </body>
 </html>

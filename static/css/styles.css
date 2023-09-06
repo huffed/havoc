@@ -1,7 +1,8 @@
 :root {
     --background-color: #0C1618;
-    --background-color-mid: hsl(190, 33%, 10%);
-    --background-color-light: hsl(190, 33%, 15%);
+    --background-color-dark: hsl(197, 33%, 6%);
+    --background-color-mid: #111f22;
+    --background-color-light: #1a2f33;
     --primary-color: #7F9C96;
     --secondary-color: #4FB6A2;
 }

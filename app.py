@@ -71,7 +71,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("login"))
+    return redirect("/")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -91,12 +91,20 @@ def register():
 @app.route("/@<username>")
 @login_required
 def user_profile(username):
-    return render_template("user-profile.html", user=current_user, username=current_user.username, uid=current_user.uid, avatar=s3_client.generate_presigned_url('get_object', Params={'Bucket': app.config["FLASKS3_BUCKET_NAME"], 'Key': current_user.avatar}, ExpiresIn=100))
+    user = User.query.filter_by(username=username).first()
+
+    if user:
+        return render_template("user-profile.html", user=user, username=user.username, uid=user.uid, avatar=s3_client.generate_presigned_url('get_object', Params={'Bucket': app.config["FLASKS3_BUCKET_NAME"], 'Key': user.avatar}, ExpiresIn=100))
 
 
 @app.route("/@<username>/edit-profile", methods=["GET", "POST"])
 @login_required
 def edit_profile(username):
+    """
+    CROPPING IS FUCKED
+    reference: http://127.0.0.1:5000/@evo
+    """
+
     form = UploadForm()
 
     if form.validate_on_submit():
@@ -123,14 +131,15 @@ def edit_profile(username):
 
             image_data = BytesIO()
 
-            cropped_image.save(image_data, format="JPEG")
+            cropped_image.save(image_data, format="PNG")
 
             image_data.seek(0)
 
-            s3_client.delete_object(
-                Bucket=app.config["FLASKS3_BUCKET_NAME"],
-                Key=current_user.avatar
-            )
+            if current_user.avatar != 'default.png':
+                s3_client.delete_object(
+                    Bucket=app.config["FLASKS3_BUCKET_NAME"],
+                    Key=current_user.avatar
+                )
 
             s3_client.upload_fileobj(
                 image_data,

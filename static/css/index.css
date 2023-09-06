@@ -24,6 +24,10 @@ body {
 
 .buttons a {
     color: var(--secondary-color);
+}
+
+a {
+    color: var(--primary-color);
     text-decoration: none;
 }
 

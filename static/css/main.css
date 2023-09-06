@@ -95,6 +95,67 @@ body {
     width: 0;
 }
 
+.navbar {
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    background: var(--background-color-dark);
+    min-height: 53px;
+    position: fixed;
+    top: 64px;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+#topbar {
+    background: transparent;
+    padding: 0 32px;
+    width: 100%;
+    min-height: 51px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+#topbar ul {
+    display: flex;
+    margin-bottom: 0;
+    margin-left: 5px;
+    padding-left: 0;
+    list-style: none;
+    margin-top: 25px;
+    font-size: 0.875rem;
+}
+
+.menu .single-menu {
+    position: relative;
+    padding: 11px 0 11px 0;
+}
+
+.menu .single-menu a {
+    display: flex;
+    height: 100%;
+    padding: 10px 0 10px 0;
+    margin-right: 44px;
+    border-radius: 6px;
+}
+
+#topbar > ul > li > a > div {
+    font-weight: 600;
+    font-size: 16px;
+    color: #f2f2f2 !important;
+}
+
+#content {
+    width: 100%;
+    min-height: auto;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
 #main .main {
     display: flex;
     flex-wrap: wrap;

@@ -8,8 +8,6 @@
     <script src="https://kit.fontawesome.com/5daaff4575.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- <a href="{{url_for('logout')}}">logout</a><br>
-    {{user.username}} -->
 
     <div id="main">
         <div class="header-container">
@@ -32,36 +30,56 @@
             </div>
         </div>
 
-        <div class="layout-space">
-            <div class="linker", style="width: 100%; margin-bottom: -8px;">
-                <a style="font-weight: 600" href="/">HAVOC</a>
-                <i class="fa fa-angle-double-right" style="font-size: 12px; margin-top: 3px; padding: 0px 4px;"></i>
-                <a style="font-weight: 600;" href="javascript:void(0);">{{username}}</a>
-            </div>
-            
-            <br>
-
-            <div class="main">
-                <div class="first">
-                    <div class="profile-container">
-                        <div class="profile">
-                            <img style="object-fit: cover;max-height: 150px;max-width: 150px;width: 150px;height: 150px;border-radius: 50%" src="{{avatar}}" alt="margiela">
-                            
-                            <div class="info" style="margin-left: 20px;flex-grow: 1;">
-                                <div class="username" style="font-size: 24px;font-weight: 600;-webkit-filter: hue-rotate(0deg) !important; filter: hue-rotate(0deg) !important;">
-                                    <span style="color:white">{{username}}</span>
-                                    <div style="margin: 5px 0;color: white;color:var(--primary-color);font-weight: 700;font-size: 12px;width: max-content;">{{uid}}</div>
-                                </div>
+        <div style="margin-top: -3px;" class="navbar" role="banner">
+            <nav id="topbar">
+                <ul>
+                    <li class="menu single-menu">
+                        <a href="{{url_for('dashboard')}}">
+                            <div>
+                                <font>Dashboard</font>
                             </div>
-                        
-                            <div style="font-weight: 600;" class="buttons">
-                                <a class="btn" style="color: white !important" href="{{url_for('edit_profile', username=username)}}">Edit profile</a>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- BEGIN CONTENT AREA -->
+        <div id="content" class="main-content">
+            <div style="padding-top: 16px;" class="page-header"></div>
+
+            <div class="layout-space">
+                <div class="linker", style="width: 100%; margin-bottom: -8px;">
+                    <a style="font-weight: 600" href="/">HAVOC</a>
+                    <i class="fa fa-angle-double-right" style="font-size: 12px; margin-top: 3px; padding: 0px 4px;"></i>
+                    <a style="font-weight: 600;" href="javascript:void(0);">{{username}}</a>
+                </div>
+                
+                <br>
+
+                <div class="main">
+                    <div class="first">
+                        <div class="profile-container">
+                            <div class="profile">
+                                <img style="object-fit: cover;max-height: 150px;max-width: 150px;width: 150px;height: 150px;border-radius: 50%" src="{{avatar}}" alt="margiela">
+                                
+                                <div class="info" style="margin-left: 20px;flex-grow: 1;">
+                                    <div class="username" style="font-size: 24px;font-weight: 600;-webkit-filter: hue-rotate(0deg) !important; filter: hue-rotate(0deg) !important;">
+                                        <span style="color:white">{{username}}</span>
+                                        <div style="margin: 5px 0;color: white;color:var(--primary-color);font-weight: 700;font-size: 12px;width: max-content;">{{uid}}</div>
+                                    </div>
+                                </div>
+                            
+                                <div style="font-weight: 600;" class="buttons">
+                                    <a class="btn" style="color: white !important" href="{{url_for('edit_profile', username=username)}}">Edit profile</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- END CONTENT AREA -->
     </div>
 </body>
 </html>

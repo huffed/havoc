@@ -7,7 +7,7 @@ class User(db.Model, UserMixin):
     uid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
-    avatar = db.Column(db.String(200), nullable=False, default="")
+    avatar = db.Column(db.String(200), nullable=False, default="default.png")
     usergroup = db.Column(db.SmallInteger, nullable=False, default=0)
 
     def get_id(self):

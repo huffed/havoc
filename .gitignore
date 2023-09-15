@@ -5,7 +5,7 @@ __pycache__/
 
 .DS_Store
 .idea/
-.vscode/
+.vscode/settings.json
 
 config.py
 create-environment.*

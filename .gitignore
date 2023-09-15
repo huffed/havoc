@@ -5,3 +5,9 @@ __pycache__/
 
 .DS_Store
 .idea/
+.vscode/
+
+config.py
+create-environment.*
+temp.jpg
+testing.py
